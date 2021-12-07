@@ -14,6 +14,7 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { AddStockButton } from "../components/Stock/AddStock";
 import { StockList } from "../components/Stock/StockList";
+import { getBackendUrl } from "../utils/functions";
 import { Item } from "../utils/interface/item.interface";
 
 export const Stock = () => {
@@ -42,7 +43,7 @@ export const Stock = () => {
   const fetchStocks = async () => {
     try {
       let res = await axios.get<Item[]>(
-        `${process.env.REACT_APP_STOCK_URL}/`
+        `${getBackendUrl()}/`
       );
       setStocks(res.data);
       setLoaded(true);

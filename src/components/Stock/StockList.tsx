@@ -12,7 +12,8 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { CreateStockDto, UpdateStockDto } from "../../utils/interface/create-stock.dto";
+import { getBackendUrl } from "../../utils/functions";
+import { UpdateStockDto } from "../../utils/interface/create-stock.dto";
 import { Item } from "../../utils/interface/item.interface";
 
 export const StockList = ({
@@ -35,7 +36,7 @@ export const StockList = ({
   const downItem = async (item: Item) => {
     try {
       item.quantity--;
-      await axios.patch<UpdateStockDto>(`${process.env.REACT_APP_STOCK_URL}/${item.id}`, item);
+      await axios.patch<UpdateStockDto>(`${getBackendUrl()}/${item.id}`, item);
       reloadTable();
     } catch (error) {
       console.error(error);
@@ -45,7 +46,7 @@ export const StockList = ({
 
   const deleteItem = async (item: Item) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_STOCK_URL}/${item.id}`);
+      await axios.delete(`${getBackendUrl()}/${item.id}`);
       reloadTable();
     } catch (error) {
       console.error(error);
@@ -56,7 +57,7 @@ export const StockList = ({
   const addItem = async (item: Item) => {
     try {
       item.quantity++;
-      await axios.post(`${process.env.REACT_APP_STOCK_URL}`, item);
+      await axios.post(`${getBackendUrl()}`, item);
       reloadTable();
     } catch (error) {
       console.error(error);

@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom';
 
 export default function Appbar() {
   return (
-
       <Box sx={{ flexGrow: 1}}>
         <AppBar position="static" style={{backgroundColor: '#282c34'}}>
           <Toolbar>
             <nav style={{display: 'flex', justifyContent: 'space-evenly', flexGrow: 1}}>
+            <Link className="navlink" to="/">
+                Accueil
+              </Link>
               <Link className="navlink" to="/stocks">
                 Stocks
               </Link>

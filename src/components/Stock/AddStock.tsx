@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { AddCircle } from "@mui/icons-material";
-import { Item } from "../../utils/interface/item.interface";
 import axios from "axios";
 import { CreateStockDto } from "../../utils/interface/create-stock.dto";
+import { getBackendUrl } from "../../utils/functions";
 
 
 export const AddStockButton = ({ reloadTable }: { reloadTable: any }) => {
@@ -36,7 +36,7 @@ export const AddStockButton = ({ reloadTable }: { reloadTable: any }) => {
       return;
     }
     try {
-      await axios.post<CreateStockDto>(`${process.env.REACT_APP_STOCK_URL}/`, {
+      await axios.post<CreateStockDto>(`${getBackendUrl()}/`, {
         quantity: +itemQuantity,
         name: itemName,
         prix: +itemPrice,

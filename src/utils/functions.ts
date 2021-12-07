@@ -20,3 +20,12 @@ export function useInterval(callback: any, delay: any) {
     }
   }, [delay]);
 }
+
+export function getBackendUrl() {
+  if (process.env.REACT_APP_STOCK_URL) {
+    return process.env.REACT_APP_STOCK_URL;
+  }
+  else {
+    return 'http://localhost:8456'
+  }
+}

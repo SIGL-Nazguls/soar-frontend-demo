@@ -17,6 +17,9 @@ function App() {
             <Route path="/stocks">
               <Stock />
             </Route>
+            <Route path="/">
+              <div style={{textAlign: 'center'}}><h1>Bienvenu sur le front demo du projet SOAR des Nazguls</h1></div>
+            </Route>
           </Switch>
         </div>
       </Router>
