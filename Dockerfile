@@ -1,20 +1,13 @@
-FROM node:10.13.0-alpine
-
-# Create Directory for the Container
+FROM node:14-alpine3.14 as build-deps
 WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm i --silent
+RUN npm install react-scripts@3.4.1 -g --silent
+COPY . ./
+RUN npm run build
 
-# Only copy the package.json file to work directory
-COPY package.json .
-
-# Install all Packages
-RUN npm install
-
-# Copy all other source code to work directory
-ADD . /usr/src/app
-
-# Need to setup env variable
-
-EXPOSE 3000:3000
-
-# Start
-CMD [ "npm", "start" ]
+# Stage 2 - the production environment
+FROM nginx:1.20.2-alpine
+COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
