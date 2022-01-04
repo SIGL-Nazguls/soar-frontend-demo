@@ -4,6 +4,7 @@ COPY package*.json ./
 RUN npm i --silent
 RUN npm install react-scripts@3.4.1 -g --silent
 COPY . ./
+COPY .env.prod .env
 RUN npm run build
 
 # Stage 2 - the production environment
